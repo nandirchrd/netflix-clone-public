@@ -12,6 +12,7 @@ import { request } from '../config/api';
 import axios from 'axios';
 
 function Home({ ...restProps }) {
+	const [trailerPathId, setTrailerPathId] = useState(null);
 	const [activeMovie, setActiveMovie] = useState(null);
 	const [isLoading, setLoading] = useState(false);
 	const [trendings, setTrendings] = useState([]);
@@ -25,8 +26,25 @@ function Home({ ...restProps }) {
 	const navigate = useNavigate();
 	const pathImg = 'https://image.tmdb.org/t/p/original';
 
+	const handleTrailerPathId = (movieId) => {
+		console.log(movieId);
+		let pathId;
+		const getTrailer = async () => {
+			const { data } = await axios(request.fetchTrailer(movieId));
+			pathId = data.results.length > 0 && data.results[0].key;
+			pathId &&
+				setTrailerPathId(
+					`https://www.youtube.com/embed/${pathId}?autoplay=1&controls=0&modestbranding`
+				);
+			if (!pathId) {
+				alert('SORRY WE DONT HAVE THE DATA OF THIS MOVIE');
+			}
+		};
+		getTrailer();
+	};
 	const handleChangeBanner = (data) => {
 		console.log(data);
+		setTrailerPathId(null);
 		setActiveMovie(data);
 	};
 	useEffect(() => {
@@ -62,8 +80,19 @@ function Home({ ...restProps }) {
 				position='fixed'
 				button={{ text: 'Log Out', navigate: '/' }}
 			/>
-			<Banner movie={activeMovie} />
+			<Banner movie={activeMovie} onTrailerPathId={handleTrailerPathId} />
 			<main className='px-4 sm:px-8'>
+				{trailerPathId && (
+					<iframe
+						className='aspect-video w-full'
+						src={trailerPathId}
+						title='YouTube video player'
+						frameborder=''
+						allow='autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
+						allowfullscreen
+					/>
+				)}
+
 				<Category title={'NETFLIX ORIGINALS'}>
 					<Movies>
 						{isLoading ? (
