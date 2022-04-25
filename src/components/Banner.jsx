@@ -1,6 +1,7 @@
 import GradientImg from '../assets/gradient.png';
-import Jumanji from '../assets/jumanji.jpg';
 const Banner = ({ children, movie, ...restProps }) => {
+	const bannerUrl =
+		'https://a-static.besthdwallpaper.com/jumanji-welcome-to-the-jungle-wallpaper-2304x720-13538_58.jpg';
 	let classes =
 		'relative bg-black py-20 px-4 sm:px-8 bg-center bg-cover overflow-hidden ';
 	const pathImg = 'https://image.tmdb.org/t/p/original';
@@ -10,7 +11,7 @@ const Banner = ({ children, movie, ...restProps }) => {
 			style={{
 				backgroundImage: movie
 					? `url("${pathImg + movie.backdrop_path}")`
-					: `url(${Jumanji})`,
+					: `url(${bannerUrl})`,
 			}}>
 			<img
 				className='absolute -bottom-5 left-0 h-24 w-full'

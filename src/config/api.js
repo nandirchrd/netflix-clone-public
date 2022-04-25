@@ -1,5 +1,5 @@
 // export { API_KEY } from './api.prod';
-const API_KEY = 'YOUR API_KEY HERE';
+const API_KEY = 'e0aa5f2716e63c07b1188fbb65f4454b';
 
 export const request = {
 	fetchTrendings: `https://api.themoviedb.org/3/trending/all/week?api_key=${API_KEY}&language=en-US`,
