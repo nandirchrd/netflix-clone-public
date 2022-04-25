@@ -11,6 +11,6 @@ export const request = {
 	fetchRomanceMovies: `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&with_genres=10749`,
 	fetchDocumentaryMovies: `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&with_genres=99`,
 	fetchTrailer: (idmovie) => {
-		return `http://api.themoviedb.org/3/movie/${idmovie}/videos?api_key=${API_KEY}`;
+		return `https://api.themoviedb.org/3/movie/${idmovie}/videos?api_key=${API_KEY}`;
 	},
 };
